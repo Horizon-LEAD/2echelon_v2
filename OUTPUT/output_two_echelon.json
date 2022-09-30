@@ -1,0 +1,23 @@
+[
+  {
+    "echelon": 1,
+    "zone_name": "1",
+    "zone_avg_size": " 1",
+    "zone_area_km2": "4.56027705032226",
+    "zone_total_services": "223",
+    "zone_latitude": "40.4173095991178",
+    "zone_longitude": "-3.7040794529756",
+    "facility_name": "San Fernando",
+    "facility_handling_time": "0",
+    "facility_latitude": "40.45047",
+    "facility_longitude": "-3.494262",
+    "vehicle_name": "Light Commercial Vehicles,Diesel,N1-III,Euro 6 a/b/c",
+    "vehicle_capacity": "161",
+    "vehicle_velocicty_km.s": "45",
+    "vehicle_velocicty_stop_time": "0.0833",
+    "total_distance_km": 194.0166,
+    "total_time_hours": 22.8874,
+    "number_vehicles": 3,
+    "_row": "avg_size"
+  }
+]

@@ -1,0 +1,12 @@
+[
+  {
+    "ResponsePlanId": 0,
+    "Category": "Electric",
+    "Fuel": "Three wheeler",
+    "Segment": "Cargo",
+    "EuroStandard": "Vehicle",
+    "Stock": 3,
+    "MeanActivity": 3.5984,
+    "Velocity": "35"
+  }
+]
