@@ -156,40 +156,40 @@ read_deliveryZone <- function(path,i,is_twoEchelon, facility){
     
     zoneAux= c(zonesUI[1,3], zonesUI[1,4], zonesUI[1,5], zonesUI[1,6])
     print(strtoi(zoneAux[1]))
-    
-    if (strtoi(zoneAux[1])== 1 || strtoi(zoneAux[3]==1)){
-      
-      
-      if(strtoi(zoneAux[1])== 1) { #the case of Madrid
-        str_url = zoneAux[2]
-        str_file_name=paste(path,zoneAux[4],sep="")
-        Read_url_GeographicData(str_url,path)
-        
-      }
-      else{
-        if (strtoi(zoneAux[3])== 1){
-         
-          str_file_name=paste(path,zoneAux[4],sep="")
-          
-        }
-      }
+    #browser()
+    #if shapefile in a url
+    if(strtoi(zoneAux[1])== 1) { #the case of Madrid
+      str_url = zoneAux[2]
+      str_file_name=paste(path,zoneAux[4],sep="")
+      Read_url_GeographicData(str_url,path)
       zoneArea = Read_area(str_file_name)
-      
       zoneArea = zoneArea/1000000
       zoneCentroid = Read_centroid(str_file_name)
       zoneCentroidGeometry = st_geometry(zoneCentroid)
       zoneCoordinatesCentroid = st_coordinates(zoneCentroidGeometry)
       zoneCentroidX = zoneCoordinatesCentroid[2]
       zoneCentroidY = zoneCoordinatesCentroid[1]
-    }else{
-      zoneArea = zonesUI[1,7]
-      zoneCentroidX = zonesUI[1,8]
-      zoneCentroidY = zonesUI[1,9]
-      
     }
-    
-   
-    
+    else{
+        #if shapefile only in the folder
+        if (strtoi(zoneAux[3])== 1){
+          str_file_name=paste(path,zoneAux[4],sep="")
+          zoneArea = Read_area(str_file_name)
+          
+          zoneArea = zoneArea/1000000
+          zoneCentroid = Read_centroid(str_file_name)
+          zoneCentroidGeometry = st_geometry(zoneCentroid)
+          zoneCoordinatesCentroid = st_coordinates(zoneCentroidGeometry)
+          zoneCentroidX = zoneCoordinatesCentroid[2]
+          zoneCentroidY = zoneCoordinatesCentroid[1]
+        }
+        else{
+            zoneArea = zonesUI[1,7]
+            zoneCentroidX = zonesUI[1,8]
+            zoneCentroidY = zonesUI[1,9]
+        }
+      }
+      
     zone = c(i,zoneAvgOrderSize,zoneArea, zoneCentroidX, zoneCentroidY,zoneNOrders)
   }
   
@@ -205,8 +205,6 @@ write_outputJSON<- function(path,dfOutput, filename){
   
   
   dfOutput_json = toJSON(dfOutput, pretty=TRUE)
-  
-  
   
   file_output=paste(path,"/OUTPUT/", sep="")
   file_output=paste(file_output,filename, sep="")
@@ -224,12 +222,13 @@ twoEchelon_output_to_CO2_Models_outputJSON <- function (path, str_file_in, str_f
   #--------------------------------------------------------------------
   
   file_input=paste(path,"/OUTPUT/", sep="")
+ # browser()
   str_file_in=paste(file_input,str_file_in, sep="")
   # Passing argument files
   input =fromJSON(str_file_in)
   # Convert JSON file to dataframe.
   df = as.data.frame(input)
-  #browser()
+ # browser()
   
   #extract number of rows
   n=nrow(df)
